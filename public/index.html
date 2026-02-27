@@ -1,17 +1,211 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff Panel</title>
+    <title>Viva Chile RP - Staff Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a3a 100%);
+            color: white; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container { 
+            max-width: 900px; 
+            margin: auto; 
+            padding: 20px; 
+        }
+        
+        .header { 
+            border-bottom: 3px solid #0055ff; 
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            color: #5865F2;
+            text-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #aaa;
+            font-size: 0.95em;
+        }
+        
+        .login-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .card { 
+            background: linear-gradient(145deg, #2a2a2a, #333333);
+            padding: 25px; 
+            border-radius: 10px; 
+            margin-top: 20px;
+            border-left: 4px solid #5865F2;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .card h2 {
+            margin-bottom: 20px;
+            color: #5865F2;
+            font-size: 1.5em;
+        }
+        
+        button { 
+            background: linear-gradient(145deg, #5865F2, #4752c4);
+            color: white; 
+            border: none; 
+            padding: 12px 30px; 
+            border-radius: 5px; 
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: linear-gradient(145deg, #4752c4, #3d4399);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .input-group { 
+            margin-bottom: 15px; 
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #ddd;
+        }
+        
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            background: #1a1a1a; 
+            color: white; 
+            border: 1px solid #444; 
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #5865F2;
+            box-shadow: 0 0 10px rgba(88, 101, 242, 0.3);
+            background: #242424;
+        }
+        
+        #result {
+            margin-top: 20px;
+        }
+        
+        .result-box {
+            background: #3a3a3a; 
+            padding: 20px; 
+            border-left: 4px solid #5865F2; 
+            margin-top: 15px; 
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .result-box p {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+        
+        .result-box strong {
+            color: #5865F2;
+        }
+        
+        .penalty-total {
+            color: #ff9900;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .error {
+            color: #ff4444;
+            background: rgba(255, 68, 68, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .success {
+            color: #44ff44;
+            background: rgba(68, 255, 68, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .login-btn {
+            background: linear-gradient(145deg, #43b581, #37a168);
+            padding: 15px 40px;
+            font-size: 1.1em;
+        }
+        
+        .login-btn:hover {
+            background: linear-gradient(145deg, #37a168, #2d8b54);
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Staff Panel</h1>
-    <p>This is where staff can manage various aspects of the application.</p>
-    <ul>
-        <li><a href="/manage-users">Manage Users</a></li>
-        <li><a href="/view-reports">View Reports</a></li>
-        <li><a href="/settings">Settings</a></li>
-    </ul>
+    <div class="container">
+        <div class="header">
+            <h1>🇨🇱 Viva Chile Roleplay</h1>
+            <p>Panel de Control - Sistema de Sanciones</p>
+        </div>
+        
+        <div class="login-section">
+            <button class="login-btn" onclick="loginWithDiscord()">🔗 Iniciar Sesión con Discord</button>
+        </div>
+
+        <div class="card">
+            <h2>⚖️ Calculadora de Sanciones</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">Calcula las sanciones aplicables según el artículo infringido</p>
+            
+            <div class="input-group">
+                <label>👤 Usuario (Discord Name)</label>
+                <input type="text" id="targetUser" placeholder="Ej: User#0000">
+            </div>
+            
+            <div class="input-group">
+                <label>📜 Artículo Infringido</label>
+                <select id="article">
+                    <option value="">-- Selecciona un artículo --</option>
+                    <option value="45">Art 0.1 - Suplantación de identidad (45m + Sanción Grave)</option>
+                    <option value="30">Art 0.4 - Contenido Inapropiado (30m + Sanción)</option>
+                    <option value="60">Art 0.10 - Character Kill (60m + Sanción)</option>
+                </select>
+            </div>
+            
+            <button onclick="calculate()">🧮 Calcular Sanción</button>
+            <div id="result"></div>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
 </body>
 </html>
